@@ -1,4 +1,3 @@
-
 const Engine = Matter.Engine;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
@@ -15,10 +14,10 @@ function setup() {
   world = engine.world;
   
    var ball_options = {
-    restitution: 0.95,
+    restitution: 0,
     frictionAir:0.01
   }
-   
+
    var ground_options ={
      isStatic: true
    };
@@ -30,6 +29,9 @@ function setup() {
 
   ground = Bodies.rectangle(100,400,400,20,ground_options);
   World.add(world,ground);
+
+  rock = Bodies.circle(200,10,20);
+  World.add(world,rock);
 
   ball = Bodies.circle(100,10,20,ball_options);
   World.add(world,ball);
@@ -52,8 +54,7 @@ function draw()
   Engine.update(engine);
   
   
- 
-
+  ellipse(rock.position.x,rock.position.y,20);
   ellipse(ball.position.x,ball.position.y,20);
   rect(ground.position.x,ground.position.y,500,20);
  
@@ -71,4 +72,3 @@ function vForce()
 {
   Matter.Body.applyForce(ball,{x:0,y:0},{x:0,y:-0.05});
 }
-  
